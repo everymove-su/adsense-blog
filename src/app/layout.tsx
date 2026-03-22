@@ -24,6 +24,9 @@ export const metadata: Metadata = {
   description: SITE_CONFIG.description,
   metadataBase: new URL(SITE_CONFIG.url),
   keywords: ['요리', '레시피', '음식', '요리법', '한국 요리', '홈쿡'],
+  verification: {
+    google: '5NRuRnuT9IeulPm_Csf8s6HbOuiwbI3gxYJ4wPk35dc',
+  },
   openGraph: {
     type: 'website',
     siteName: SITE_CONFIG.name,
