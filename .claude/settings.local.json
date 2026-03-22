@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pnpm create:*)",
+      "Bash(export PATH=\"$PATH:/opt/homebrew/lib/node_modules/.bin:/opt/homebrew/bin\")",
+      "Bash(pnpm --version)",
+      "Bash(export PATH=\"$PATH:/opt/homebrew/lib/node_modules/.bin\")"
+    ]
+  }
+}
