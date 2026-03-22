@@ -1,0 +1,10 @@
+export const ADSENSE_CLIENT_ID = process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID || 'ca-pub-0000000000000000';
+
+export const ADSENSE_SLOTS = {
+  TOP: process.env.NEXT_PUBLIC_ADSENSE_SLOT_TOP || '0000000001',
+  MIDDLE: process.env.NEXT_PUBLIC_ADSENSE_SLOT_MIDDLE || '0000000002',
+  BOTTOM: process.env.NEXT_PUBLIC_ADSENSE_SLOT_BOTTOM || '0000000003',
+  SIDEBAR: process.env.NEXT_PUBLIC_ADSENSE_SLOT_SIDEBAR || '0000000004',
+} as const;
+
+export type AdSensePosition = keyof typeof ADSENSE_SLOTS;
