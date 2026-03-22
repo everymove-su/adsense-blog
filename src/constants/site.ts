@@ -1,13 +1,13 @@
 export const SITE_CONFIG = {
-  name: '오늘의 생활정보',
-  description: '요리 레시피, 영화 리뷰, 스포츠 정보까지 일상에 유용한 생활정보를 매일 업데이트합니다.',
+  name: '오늘의 레시피',
+  description: '매일 새로운 요리 레시피를 소개합니다. 한식부터 간편 요리까지 집에서 쉽게 만들 수 있는 레시피를 매일 업데이트합니다.',
   url: process.env.NEXT_PUBLIC_SITE_URL || 'https://your-blog-url.vercel.app',
   ogImage: '/og-image.png',
   author: '블로그 운영자',
   email: 'contact@your-blog-url.vercel.app',
 } as const;
 
-export const CATEGORIES = ['생활정보', '요리', '영화', '스포츠'] as const;
+export const CATEGORIES = ['요리'] as const;
 
 export type Category = typeof CATEGORIES[number];
 

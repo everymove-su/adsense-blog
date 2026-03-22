@@ -4,7 +4,29 @@
       "Bash(pnpm create:*)",
       "Bash(export PATH=\"$PATH:/opt/homebrew/lib/node_modules/.bin:/opt/homebrew/bin\")",
       "Bash(pnpm --version)",
-      "Bash(export PATH=\"$PATH:/opt/homebrew/lib/node_modules/.bin\")"
+      "Bash(export PATH=\"$PATH:/opt/homebrew/lib/node_modules/.bin\")",
+      "Bash(pnpm add:*)",
+      "Bash(pnpm tsc:*)",
+      "Bash(pnpm build:*)",
+      "Bash(echo \"Exit: $?\")",
+      "Bash(ls:*)",
+      "Bash(grep -l 'status: \"\"\"\"published\"\"\"\"' /Users/bong/developer/blog/content/posts/*.mdx)",
+      "Bash(gh --version)",
+      "Bash(vercel --version)",
+      "Bash(brew:*)",
+      "Bash(gh auth:*)",
+      "Bash(git add:*)",
+      "Bash(git restore:*)",
+      "Bash(git commit:*)",
+      "Bash(gh repo:*)",
+      "Bash(npm install:*)",
+      "Bash(vercel:*)",
+      "Bash(/Users/bong/developer/blog/.env.local:*)",
+      "Bash(PIXABAY_API_KEY=55125403-a55dca98f183bb59108668806 npx tsx scripts/download-images.ts 2>&1)",
+      "Bash(grep -l \"thumbnail.webp\" content/posts/*.mdx)",
+      "Bash(git push:*)",
+      "Bash(nslookup:*)",
+      "Bash(curl -sI https://dailylogtip.com)"
     ]
   }
 }
