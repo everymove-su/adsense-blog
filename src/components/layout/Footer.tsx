@@ -28,6 +28,13 @@ export default function Footer() {
             >
               개인정보처리방침
             </Link>
+            <span className="text-gray-300">|</span>
+            <Link
+              href="/contact"
+              className="text-sm text-gray-500 hover:text-blue-600 transition-colors"
+            >
+              문의하기
+            </Link>
           </nav>
         </div>
 
