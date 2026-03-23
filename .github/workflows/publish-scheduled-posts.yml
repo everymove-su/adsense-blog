@@ -1,0 +1,43 @@
+name: 예약 발행 처리
+
+on:
+  schedule:
+    # 매일 KST 01:00 (UTC 16:00) 실행
+    - cron: "0 16 * * *"
+  workflow_dispatch: # 수동 실행 가능
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: 예약 발행 스크립트 실행
+        run: npx tsx scripts/check-scheduled-posts.ts
+
+      - name: 변경사항 커밋 & 푸시
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add content/posts/
+          if git diff --staged --quiet; then
+            echo "발행할 포스트 없음"
+          else
+            git commit -m "feat: 예약 발행 포스트 자동 발행"
+            git push
+          fi
