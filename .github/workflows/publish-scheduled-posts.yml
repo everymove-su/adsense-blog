@@ -2,8 +2,8 @@ name: 예약 발행 처리
 
 on:
   schedule:
-    # 매일 KST 01:00 (UTC 16:00) 실행
-    - cron: "0 16 * * *"
+    # 매 시간 정각 실행 (publishAt 시간에 맞춰 발행)
+    - cron: "0 * * * *"
   workflow_dispatch: # 수동 실행 가능
 
 jobs:
