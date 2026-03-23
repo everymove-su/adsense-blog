@@ -24,6 +24,8 @@ const posts: { slug: string; keyword: string }[] = [
   { slug: 'parasite-movie-review', keyword: 'korean cinema movie' },
   { slug: 'premier-league-big6-guide', keyword: 'soccer football stadium' },
   { slug: 'tteokbokki-recipe', keyword: 'tteokbokki korean rice cake' },
+  { slug: 'galbitang-recipe', keyword: 'korean beef rib soup galbitang' },
+  { slug: 'chadol-doenjang-jjigae-recipe', keyword: 'korean doenjang jjigae soybean paste soup' },
   { slug: 'easy-doenjang-jjigae-recipe', keyword: 'korean miso soup tofu' },
   { slug: 'harry-potter-series-guide', keyword: 'magic fantasy castle' },
   { slug: 'nba-greatest-teams-ranking', keyword: 'basketball court arena' },
