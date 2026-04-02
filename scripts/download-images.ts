@@ -86,16 +86,30 @@ function downloadFile(url: string, dest: string): Promise<void> {
   });
 }
 
+const MIN_FILE_SIZE = 1000; // 1KB 미만은 에러 응답으로 간주
+const BATCH_SIZE = 5;       // 5개마다 긴 휴식
+const BATCH_DELAY = 5000;   // 배치 간 5초 대기
+const REQUEST_DELAY = 1500; // 요청 간 1.5초 대기
+
 async function main() {
   console.log(`\n총 ${posts.length}개 포스트 이미지 다운로드 시작\n`);
+
+  let downloadCount = 0;
 
   for (const post of posts) {
     const dir = path.join('public', 'images', 'posts', post.slug);
     const dest = path.join(dir, 'thumbnail.jpg');
 
-    if (fs.existsSync(dest)) {
+    // 파일이 존재하고 크기가 정상이면 건너뜀
+    if (fs.existsSync(dest) && fs.statSync(dest).size >= MIN_FILE_SIZE) {
       console.log(`  [건너뜀] ${post.slug} (이미 존재)`);
       continue;
+    }
+
+    // 깨진 파일이면 삭제 후 재다운로드
+    if (fs.existsSync(dest)) {
+      console.log(`  [재다운로드] ${post.slug} (깨진 파일 감지: ${fs.statSync(dest).size}bytes)`);
+      fs.unlinkSync(dest);
     }
 
     console.log(`  [${post.slug}] 검색 중: "${post.keyword}"`);
@@ -106,10 +120,24 @@ async function main() {
 
       fs.mkdirSync(dir, { recursive: true });
       await downloadFile(imageUrl, dest);
-      console.log(`  [완료] ${post.slug}`);
 
-      // API 요청 제한 방지 (초당 1건)
-      await new Promise(r => setTimeout(r, 1100));
+      const size = fs.statSync(dest).size;
+      if (size < MIN_FILE_SIZE) {
+        fs.unlinkSync(dest);
+        console.error(`  [실패] ${post.slug} - 응답이 너무 작음 (${size}bytes), 건너뜀`);
+        continue;
+      }
+
+      console.log(`  [완료] ${post.slug} (${(size / 1024).toFixed(0)}KB)`);
+      downloadCount++;
+
+      // 5개마다 5초 대기 (API 한도 초과 방지)
+      if (downloadCount % BATCH_SIZE === 0) {
+        console.log(`\n  ⏸ ${BATCH_DELAY / 1000}초 대기 중 (API 한도 초과 방지)...\n`);
+        await new Promise(r => setTimeout(r, BATCH_DELAY));
+      } else {
+        await new Promise(r => setTimeout(r, REQUEST_DELAY));
+      }
     } catch (err) {
       console.error(`  [오류] ${post.slug}:`, err);
     }
